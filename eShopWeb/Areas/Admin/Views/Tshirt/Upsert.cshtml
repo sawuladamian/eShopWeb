@@ -1,0 +1,92 @@
+﻿@model eShop.Models.ViewModels.TshirtVM
+@{
+    ViewData["Title"] = "Create";
+}
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+   <input asp-for="Tshirt.Id" hidden/>
+   <input asp-for="Tshirt.ImageUrl" hidden/>
+   <div class="row">
+        <div class="col-10">
+<div class="border p-3 mt-4 row">    
+            <h2 class="text-priamry">@(Model.Tshirt.Id!=0?"Update":"Create") T-shirt</h2>
+
+        
+<div class="mb-3">    
+  <label asp-for="Tshirt.Name" ></label>
+  <input asp-for="Tshirt.Name" class="form-control">
+  <span asp-validation-for="Tshirt.Name" class="text-danger"></span>
+</div>
+
+<div class="mb-3">    
+  <label asp-for="Tshirt.Description" ></label>
+  <input asp-for="Tshirt.Description" class="form-control">
+  <span asp-validation-for="Tshirt.Description" class="text-danger"></span>
+</div>
+<div class="mb-3">    
+  <label asp-for="Tshirt.ListPrice" ></label>
+  <input asp-for="Tshirt.ListPrice" class="form-control">
+  <span asp-validation-for="Tshirt.ListPrice" class="text-danger"></span>
+</div>
+<div class="mb-3">    
+  <label asp-for="Tshirt.Price" ></label>
+  <input asp-for="Tshirt.Price" class="form-control">
+  <span asp-validation-for="Tshirt.Price" class="text-danger"></span>
+</div>
+<div class="mb-3">    
+  <label asp-for="Tshirt.Price50" ></label>
+  <input asp-for="Tshirt.Price50" class="form-control">
+  <span asp-validation-for="Tshirt.Price50" class="text-danger"></span>
+</div>
+<div class="mb-3 col-6">    
+  <label asp-for="Tshirt.ColorId" ></label>
+  <select asp-for="Tshirt.ColorId" asp-items="@Model.ColorList" class="form-select">
+      <option disabled selected>--Select Color--</option>
+  </select>
+  </div>
+  <div class="mb-3 col-6">    
+  <label asp-for="Tshirt.SizeId" ></label>
+  <select asp-for="Tshirt.SizeId" asp-items="@Model.SizeList" class="form-select">
+      <option disabled selected>--Select Size--</option>
+  </select>
+  </div>
+ 
+<div class="mb-3">    
+  <label asp-for="Tshirt.ImageUrl" ></label>
+  <input type="file" name="file" asp-for="Tshirt.ImageUrl" id="uploadBox" class="form-control">
+</div>
+
+    @if(Model.Tshirt.Id!=0){
+                <button type="submit" class="mt-5 btn btn-primary" style="width:150px;">Update</button>
+            }else
+            {
+                <button type="submit" class="mt-5 btn btn-primary" style="width:150px;">Create</button>
+            }
+            <a asp-controller="Cover" asp-action="Index" class="mt-5 btn btn-dark btn-primary " style="width:150px;">Back to list</a>
+        </div>
+        
+        <img src="" />
+    </div>
+    </div>
+    
+    
+
+</form>
+
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+       function ValidateInput(){
+        if(document.getElementById("uploadBox").value==""){
+            Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Please upload an Image!',
+            });
+            return false;
+        }
+         return true;
+    }</script>
+   
+    }
