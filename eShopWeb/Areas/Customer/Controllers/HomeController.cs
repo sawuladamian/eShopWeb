@@ -32,16 +32,6 @@ namespace eShopWeb.Controllers
             
            return View(vm);
         }
-
-        //public HomeVM GetByName([FromQuery]string FilterName="")
-        //{
-        //    HomeVM vm = new()
-        //    {
-        //        FilterName=FilterName,
-        //        Tshirt= _unitOfWork.Tshirt.GetAll(x=>x.Name.Contains(FilterName),includeProperties:"Color,Size")
-        //    };
-        //    return vm;
-        //}
         public IActionResult Privacy()
         {
             return View();
