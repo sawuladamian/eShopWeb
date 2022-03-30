@@ -12,7 +12,7 @@ namespace eShop.DataAccess.Repository.IRepository
         IColorRepository Color { get; }
         ITshirtRepository Tshirt  { get; }
         
-        //IApplicationUserRepository ApplicationUser { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         //IShoppingCartRepository ShoppingCart { get; }
         //IOrderDetailRepository OrderDetail { get; }
         //IOrderHeaderRepository OrderHeader { get; }
