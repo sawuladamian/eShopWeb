@@ -25,13 +25,15 @@ namespace eShopWeb.Controllers
             
             HomeVM vm = new()
             {
-                FilterName = FilterName,               
-                Tshirt = FilterName!=null ? 
-                _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Color,Size")  :
-                _unitOfWork.Tshirt.GetAll(includeProperties: "Color,Size")
+                FilterName = FilterName,
+                Tshirt = _unitOfWork.Tshirt.GetAll(includeProperties: "Color,Size")
             };
-            
-           return View(vm);
+            vm.Tshirt = vm.Tshirt.GroupBy(x => x.ProductCode).First();
+            if (FilterName != null)
+            {
+                vm.Tshirt = _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Color,Size").GroupBy(x => x.ProductCode).Select(g => g.OrderBy(x => x.ProductCode).FirstOrDefault());
+            }
+            return View(vm);
         }
         public IActionResult Privacy()
         {
