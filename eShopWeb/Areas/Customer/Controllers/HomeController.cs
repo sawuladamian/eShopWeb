@@ -21,23 +21,17 @@ namespace eShopWeb.Controllers
        
         public IActionResult Index([FromQuery] string FilterName = "")
         {
+            
             HomeVM vm = new()
             {
-                FilterName = FilterName,
-                Tshirt = _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Color,Size")
+                FilterName = FilterName,               
+                Tshirt = FilterName!=null ? 
+                _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Color,Size")  :
+                _unitOfWork.Tshirt.GetAll(includeProperties: "Color,Size")
             };
-            return View(vm);
+            
+           return View(vm);
         }
-
-        //public HomeVM GetByName([FromQuery]string FilterName="")
-        //{
-        //    HomeVM vm = new()
-        //    {
-        //        FilterName=FilterName,
-        //        Tshirt= _unitOfWork.Tshirt.GetAll(x=>x.Name.Contains(FilterName),includeProperties:"Color,Size")
-        //    };
-        //    return vm;
-        //}
         public IActionResult Privacy()
         {
             return View();

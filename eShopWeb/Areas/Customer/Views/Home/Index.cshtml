@@ -3,21 +3,20 @@
     ViewData["Title"] = "Home Page";
 }
   
+
 <section class="esh-catalog-hero">
-    <div class="container">
-        <img class="esh-catalog-title" src="~/images/main_banner_text.png" />
-    </div>
+    
 </section>
 <section class="esh-catalog-filters">
     <div class="container">
-        <form method="get">
-            
-             <label class="esh-catalog-label" data-title="brand">
-                <input asp-for="FilterName" asp-class="esh-catalog-filter" >
-            </label>
-           
-            <button type="submit" asp-controller="Home" asp-action="Index" class="esh-catalog-send" src="~/images/arrow-right.svg" />
+        
+        <form method="get">            
+             <label class="esh-catalog-label" data-title="search t-shirt">
+                <input class="esh-catalog-filter" asp-for="FilterName" asp-class="esh-catalog-filter" >
+            </label>           
+            <button class="esh-catalog-send" type="submit" asp-controller="Home" asp-action="Index">Search</button>
         </form>
+   
     </div>
 </section>
 
@@ -25,7 +24,7 @@
     @foreach(var product in Model.Tshirt)
     {
     <div class="col-lg-3 col-md-6">
-        <div class="row p-2">
+        <div class="row m-2">
             <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
             <div class="card">
                 <img src='@product.ImageUrl' width="300" height="300" class="card-img-top rounded"/>
@@ -42,7 +41,7 @@
                     </div>
                     </div>
             </div>
-            <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId="@product.Id">Details</a>
+            <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId="@product.Id"><i class="bi bi-cart"></i> Add to cart</a>
             </div>
             
         </div>
