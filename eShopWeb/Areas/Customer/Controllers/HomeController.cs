@@ -2,13 +2,14 @@
 using eShop.Models;
 using eShop.Models.ViewModels;
 using eShopWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace eShopWeb.Controllers
 {
     [Area("Customer")]
-    public class HomeController : Controller
+        public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;

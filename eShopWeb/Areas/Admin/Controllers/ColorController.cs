@@ -1,11 +1,14 @@
 ﻿using eShop.DataAccess.Repository.IRepository;
 using eShop.Models;
+using eShop.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace eShopWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ColorController : Controller
     {
         public IUnitOfWork _unitOfWork;
