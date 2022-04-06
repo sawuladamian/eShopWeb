@@ -1,0 +1,103 @@
+﻿@model ShoppingCart
+@{
+    ViewData["Title"] = "Details";
+}
+
+<form method="post">
+    <input hidden asp-for="TshirtId" />
+        <div class="card  container mt-4">
+            <div class="card-header bg-primary text-light ml-0  row ">
+                <div class="col-12 col-md-6">
+                    <h1 class="text-white-50">@Model.Tshirt.Name</h1>
+                    </div>
+                <div class="col-12 col-md-6 text-end pt-4">
+               <span class="badge bg-info pt-2" style="height:30px;">@Model.Tshirt.ProductCode</span>
+                    <span class="badge bg-warning pt-2" style="height:30px;">@Model.Tshirt.Color.Type</span>
+                </div>
+            </div>
+            <div class="card-body row container">
+                <div class="container rounded p-2">
+                    <div class="row">
+                        <div class="col-8 col-lg-8">
+                            <div class="row pl-2">
+                                <p class="text-black">@Model.Tshirt.Description</p>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-primary">Size: @Model.Tshirt.Size.Type</h5>
+                            </div>
+                            <div class="row pl-2">
+                                <h5 class="text-primary pb-2">List Price: <strike>@Model.Tshirt.ListPrice.ToString("c")</strike></h5>
+                            </div>
+
+                            <div class="row text-center pl-2">
+                                <div class="p-1 col-2 border-bottom">
+                                    <div>Quantity</div>
+                                </div>
+                                <div class="p-1 col-2  border-bottom">
+                                    <div>1-49</div>
+                                </div>
+                                <div class="p-1 col-2  border-bottom">
+                                    <div>50+</div>
+                                </div>
+                             </div>
+                            <div class="row text-center pl-2" style="color:maroon; font-weight:bold">
+                                <div class="p-1 col-2">
+                                    <div>Price</div>
+                                </div>
+                                <div class="p-1 col-2">
+                                    <div>@Model.Tshirt.Price.ToString("c")</div>
+                                </div>
+                                <div class="p-1 col-2">
+                                    <div>@Model.Tshirt.Price50.ToString("c")</div>
+                                </div>
+                                </div>
+                            
+                            <div class="row pl-2">
+                                <div class="col-2 text-primary"><h4>Count</h4></div>
+                                <div class="col-10"><input asp-for="Count" class="form-control"  /></div>
+                                <span asp-validation-for="@Model.Count" class="text-danger"></span>
+                            </div>
+                             <div class="row pl-2">
+                                 <div class="text-primary"><h4>Available Colors</h4></div>
+                                 </div>
+                                 <div class="col">
+                            @foreach(var item in Model.ColorList){  
+                               <a asp-action="Details" style="text-decoration: none;" class="pr-2" asp-route-tshirtId="@item.Id" >
+                                    @if(item.ImageUrl == Model.Tshirt.ImageUrl){
+                                        <img style="border-style:solid; border-width:medium;border-color:rgb(21,140,186); height:78px;width:54px;" src="@item.ImageUrl" />
+                                    }else{
+                                       <img style="height:78px;width:54px;" src="@item.ImageUrl" />
+                                       }
+                                         </a>
+                               } 
+                          </div>
+                                <span asp-validation-for="@Model.Count" class="text-danger"></span>
+                           
+                        </div>
+                        <div class="img-magnifier-container col-12 col-lg-3 offset-lg-1 text-center">
+                            <img id="tshirtImg" src="@Model.Tshirt.ImageUrl" style="height:400px;width:280px" class="rounded" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-white">
+                <div class="row">
+                    <div class="col-12 col-md-6 pb-1">
+                        <a class="btn btn-secondary form-control" asp-action="Index" style="height:50px;">Back to List</a>
+                    </div>
+                    <div class="col-12 col-md-6 pb-1">
+                        <button type="submit" value="Add to Cart" class="btn btn-primary form-control" style="height:50px;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+
+
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
+    }
+   <script src="~/js/details.js"></script>
+   <script>magnify("tshirtImg", 3);</script>
+ }

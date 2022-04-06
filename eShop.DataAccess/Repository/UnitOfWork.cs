@@ -17,15 +17,15 @@ namespace eShop.DataAccess.Repository.IRepository
             Color = new ColorRepository(_db);
             Tshirt = new TshirtRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
-            //ShoppingCart = new ShoppingCartRepository(_db);
-            //OrderHeader = new OrderHeaderRepository(_db);
-            //OrderDetail = new OrderDetailRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
+            OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetail = new OrderDetailRepository(_db);
         }
 
         
-        //public IShoppingCartRepository ShoppingCart { get; private set; }
-        //public IOrderDetailRepository OrderDetail { get; private set; }
-        //public IOrderHeaderRepository OrderHeader { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IOrderDetailRepository OrderDetail { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; private set; }
         
 
         public ISizeRepository Size { get; private set; }

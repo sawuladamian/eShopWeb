@@ -31,7 +31,6 @@
                 <div class="card-body">
                 <div class="pl-1">
                     <p class="card-title h5 text-primary">@product.Name</p>
-                    <p class="card-title text-secondary">@product.Description</p>
                 </div>
                 <div class="pl-1">
                     <p>List Price: <b><strike>$@product.ListPrice.ToString("0.00")</strike></b></p>
@@ -41,7 +40,7 @@
                     </div>
                     </div>
             </div>
-            <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId="@product.Id"><i class="bi bi-cart"></i> Add to cart</a>
+            <a asp-action="Details" class="btn btn-primary form-control" asp-route-tshirtId="@product.Id"><i class="bi bi-cart"></i> Details</a>
             </div>
             
         </div>
