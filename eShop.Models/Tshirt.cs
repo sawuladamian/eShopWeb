@@ -43,6 +43,7 @@ namespace eShop.Models
         public Size Size{ get; set; }
         [Required]
         public string ProductCode { get; set; }
-
+        
+        
     }
 }

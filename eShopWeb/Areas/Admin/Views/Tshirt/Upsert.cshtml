@@ -37,11 +37,19 @@
   <input asp-for="Tshirt.Price50" class="form-control">
   <span asp-validation-for="Tshirt.Price50" class="text-danger"></span>
 </div>
+<div class="mb-3">    
+  <label asp-for="Tshirt.ProductCode" ></label>
+  <input asp-for="Tshirt.ProductCode" class="form-control">
+  <span asp-validation-for="Tshirt.ProductCode" class="text-danger"></span>
+</div>
 <div class="mb-3 col-6">    
-  <label asp-for="Tshirt.ColorId" ></label>
-  <select asp-for="Tshirt.ColorId" asp-items="@Model.ColorList" class="form-select">
-      <option disabled selected>--Select Color--</option>
-  </select>
+  <label asp-for="ColorList" ></label>
+ @if(Model.Tshirt.Id==0){
+  <select asp-for="xxxtest" asp-items="@Model.ColorList" class="form-select" multiple></select>
+      }else{
+          <select asp-for="Tshirt.ColorId" asp-items="@Model.ColorList" class="form-select"></select>
+      }      
+  
   </div>
   <div class="mb-3 col-6">    
   <label asp-for="Tshirt.SizeId" ></label>

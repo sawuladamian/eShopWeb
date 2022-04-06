@@ -28,6 +28,7 @@ namespace eShop.DataAccess.Repository
                 objFromDb.Price50=obj.Price50;
                 objFromDb.ColorId = obj.ColorId;
                 objFromDb.SizeId = obj.SizeId;
+                objFromDb.ProductCode = obj.ProductCode;
                 if (obj.ImageUrl != null) 
                 { 
                     objFromDb.ImageUrl=obj.ImageUrl;

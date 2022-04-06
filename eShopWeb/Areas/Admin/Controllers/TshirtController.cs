@@ -76,19 +76,28 @@ namespace eShopWeb.Areas.Admin.Controllers
                 }
                 obj.Tshirt.ImageUrl = @"\images\tshirts\" + fileName + extension;
             }
-
+            
             if (obj.Tshirt.Id == 0)
-            {                               
-               _unitOfWork.Tshirt.Add(obj.Tshirt);
+            {
+                foreach (var item in obj.xxxtest)
+                {
+                    obj.Tshirt.ColorId = item;
+                    obj.Tshirt.Id = 0;
+                    _unitOfWork.Tshirt.Add(obj.Tshirt);
+                    _unitOfWork.Save();
+                }
                 TempData["success"] = "Tshirt added successfully!";
             }
             else
             {
+                    
                 _unitOfWork.Tshirt.Update(obj.Tshirt);
                 TempData["success"] = "Tshirt edited successfully!";
+                
             }
             _unitOfWork.Save();
-            
+
+
             return RedirectToAction("Index");
         }
             
