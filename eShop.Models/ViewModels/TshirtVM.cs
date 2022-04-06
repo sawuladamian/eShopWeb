@@ -15,5 +15,7 @@ namespace eShop.Models.ViewModels
         public IEnumerable<SelectListItem> ColorList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> SizeList { get; set; }
+        [ValidateNever]
+        public List<int> xxxtest { get; set; }
     }
 }

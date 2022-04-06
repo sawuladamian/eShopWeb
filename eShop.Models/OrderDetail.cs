@@ -18,8 +18,8 @@ namespace eShop.Models
         [ValidateNever]
         public OrderHeader OrderHeader { get; set; }
         [Required]
-        public int ProductId { get; set; }
-        [ForeignKey("ProductId")]
+        public int TshirtId { get; set; }
+        [ForeignKey("TshirtId")]
         [ValidateNever]
         public Tshirt Tshirt { get; set; }
         public int Count { get; set; }

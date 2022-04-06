@@ -14,8 +14,8 @@ namespace eShop.Models
         
         public int Id { get; set; }
         
-        public int ProductId { get; set; }
-        [ForeignKey("ProductId")]
+        public int TshirtId { get; set; }
+        [ForeignKey("TshirtId")]
         [ValidateNever]
         public Tshirt Tshirt{ get; set; }
         [Range(1,1000)]
@@ -27,5 +27,7 @@ namespace eShop.Models
         public ApplicationUser ApplicationUser { get; set; }
         [NotMapped]
         public double  Price{ get; set; }
+        [NotMapped]
+        public IEnumerable<Tshirt> ColorList { get; set; }
     }
 }

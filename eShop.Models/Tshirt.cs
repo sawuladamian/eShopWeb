@@ -41,6 +41,9 @@ namespace eShop.Models
         public int SizeId { get; set; }
         [ValidateNever]
         public Size Size{ get; set; }
-
+        [Required]
+        public string ProductCode { get; set; }
+        
+        
     }
 }

@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//namespace eShop.DataAccess.Repository
-//{
-//    public class OrderDetailRepository: Repository<OrderDetail>, IOrderDetailRepository
-//    {
-//        private ApplicationDbContext _db;
-//        public OrderDetailRepository(ApplicationDbContext db) :base(db)
-//        {
-//            _db = db;        
-//        }
-       
-//        public void Update(OrderDetail obj)
-//        {
-//            _db.OrderDetails.Update(obj);
-//        }
-//    }
-//}
+namespace eShop.DataAccess.Repository
+{
+    public class OrderDetailRepository : Repository<OrderDetail>, IOrderDetailRepository
+    {
+        private ApplicationDbContext _db;
+        public OrderDetailRepository(ApplicationDbContext db) : base(db)
+        {
+            _db = db;
+        }
+
+        public void Update(OrderDetail obj)
+        {
+            _db.OrderDetails.Update(obj);
+        }
+    }
+}
