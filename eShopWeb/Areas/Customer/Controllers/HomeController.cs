@@ -21,10 +21,10 @@ namespace eShopWeb.Controllers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-       
+
         public IActionResult Index([FromQuery] string FilterName = "")
         {
-            
+
             HomeVM vm = new()
             {
                 FilterName = FilterName,
@@ -35,7 +35,12 @@ namespace eShopWeb.Controllers
             {
                 vm.Tshirt = _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Color,Size").GroupBy(x => x.ProductCode).Select(g => g.OrderBy(x => x.ProductCode).FirstOrDefault());
             }
-            return View(vm);
+            if (vm.Tshirt.Count()==0)
+            {
+                TempData["error"] = "Sorry, no result found";
+            }
+           
+            return View(vm);            
         }
         public IActionResult Details(int tshirtId)
         {
@@ -65,6 +70,7 @@ namespace eShopWeb.Controllers
             if (cartFromDb == null)
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
                 HttpContext.Session.SetInt32(SD.SessionCart,
                     _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).ToList().Count);
             }
@@ -73,8 +79,9 @@ namespace eShopWeb.Controllers
                 _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCart.Count);
                 HttpContext.Session.SetInt32(SD.SessionCart,
                     _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).ToList().Count);
+                _unitOfWork.Save();
             }
-            _unitOfWork.Save();
+            
             return RedirectToAction("Index");
 
         }
