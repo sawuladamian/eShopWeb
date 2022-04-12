@@ -79,7 +79,7 @@ namespace eShopWeb.Areas.Admin.Controllers
             
             if (obj.Tshirt.Id == 0)
             {
-                foreach (var item in obj.xxxtest)
+                foreach (var item in obj.ColorsIds)
                 {
                     obj.Tshirt.ColorId = item;
                     obj.Tshirt.Id = 0;

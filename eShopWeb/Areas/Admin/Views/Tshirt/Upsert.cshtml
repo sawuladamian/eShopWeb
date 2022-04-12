@@ -45,7 +45,7 @@
 <div class="mb-3 col-6">    
   <label asp-for="ColorList" ></label>
  @if(Model.Tshirt.Id==0){
-  <select asp-for="xxxtest" asp-items="@Model.ColorList" class="form-select" multiple></select>
+  <select asp-for="ColorsIds" asp-items="@Model.ColorList" class="form-select" multiple></select>
       }else{
           <select asp-for="Tshirt.ColorId" asp-items="@Model.ColorList" class="form-select"></select>
       }      
