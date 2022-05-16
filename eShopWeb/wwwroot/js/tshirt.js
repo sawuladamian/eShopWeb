@@ -21,19 +21,7 @@ function loadDataTable() {
             },
             { "data": "name", "width": "15%" },
             { "data": "price", "width": "15%" },
-            { "data": "color.type", "width": "10%" },
-            {
-                "data": "color.colorInRGB",
-                "render": function (data) {
-                    return `
-                        <svg width="70" height="40">
-                        <rect width="70" height="40" style="fill:${data};stroke-width:3;stroke:rgb(0,0,0);"/>
-                         Sorry, your browser does not support inline SVG.
-                         </svg>
-                `
-                },
-                "width": "15%"
-            },
+                       
             { "data": "size.type", "width": "7%" },
               {
                 "data": "id",

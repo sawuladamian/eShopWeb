@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace eShop.DataAccess.Repository.IRepository
 {
-    public interface IColorRepository :IRepository<Color>
+    public interface ITshirtImageUrlsRepository : IRepository<TshirtImagesUrl>
     {
-        void Update(Color entity);
+        void Update(TshirtImagesUrl obj);
     }
 }

@@ -1,3 +1,7 @@
 ﻿@model int
 
-<i class="bi bi-cart"></i> &nbsp; (@Model)
+<i class="bi bi-cart"></i>&nbsp;
+@if (Model != 0)
+{
+    <span>(@Model)</span>
+}

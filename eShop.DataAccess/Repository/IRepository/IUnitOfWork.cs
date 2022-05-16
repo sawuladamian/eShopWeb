@@ -9,13 +9,14 @@ namespace eShop.DataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         ISizeRepository Size { get; }
-        IColorRepository Color { get; }
+        
         ITshirtRepository Tshirt  { get; }
         
         IApplicationUserRepository ApplicationUser { get; }
         IShoppingCartRepository ShoppingCart { get; }
         IOrderDetailRepository OrderDetail { get; }
         IOrderHeaderRepository OrderHeader { get; }
+        ITshirtImageUrlsRepository TshirtImageUrl { get; }
         void Save();
 
 

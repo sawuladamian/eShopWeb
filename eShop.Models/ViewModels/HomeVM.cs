@@ -10,5 +10,6 @@ namespace eShop.Models.ViewModels
     {
         public IEnumerable<Tshirt> Tshirt { get; set; }
         public string FilterName { get; set; }
+        
     }
 }
