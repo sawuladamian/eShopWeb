@@ -26,7 +26,7 @@ namespace eShop.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
         [NotMapped]
-        public double  Price{ get; set; }
+        public double  Price { get; set; }
         [NotMapped]
         public IEnumerable<Tshirt> ColorList { get; set; }
     }

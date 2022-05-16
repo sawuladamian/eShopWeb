@@ -14,12 +14,13 @@ namespace eShop.DataAccess.Repository.IRepository
         {
             _db = db;
             Size = new SizeRepository(_db);
-            Color = new ColorRepository(_db);
+            
             Tshirt = new TshirtRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             ShoppingCart = new ShoppingCartRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
+            TshirtImageUrl = new TshirtImageUrlsRepository(_db);
         }
 
         
@@ -29,9 +30,10 @@ namespace eShop.DataAccess.Repository.IRepository
         
 
         public ISizeRepository Size { get; private set; }
-        public IColorRepository Color { get; private set; }
+        
         public ITshirtRepository Tshirt { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public ITshirtImageUrlsRepository TshirtImageUrl { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

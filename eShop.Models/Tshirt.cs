@@ -32,11 +32,6 @@ namespace eShop.Models
         [ValidateNever]
         public string ImageUrl { get; set; }
         [Required]
-        [Display(Name = "Color")]
-        public int ColorId { get; set; }
-        [ValidateNever]
-        public Color Color{ get; set; }
-        [Required]
         [Display(Name = "Size")]
         public int SizeId { get; set; }
         [ValidateNever]

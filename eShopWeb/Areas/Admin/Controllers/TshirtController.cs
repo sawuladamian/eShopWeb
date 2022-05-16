@@ -31,11 +31,7 @@ namespace eShopWeb.Areas.Admin.Controllers
             TshirtVM tshirtVM = new()
             {
                 Tshirt = new(),
-                ColorList = _unitOfWork.Color.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.Type,
-                    Value = i.Id.ToString()
-                }),
+                
                 SizeList = _unitOfWork.Size.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Type,
@@ -53,53 +49,58 @@ namespace eShopWeb.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(TshirtVM obj, IFormFile? file)
+        public IActionResult Upsert(TshirtVM obj, IEnumerable<IFormFile>? file)
         {
-            
-            string wwwRootPath = _hostEnvironment.WebRootPath;
-            if (file != null)
+
+            foreach (var item in file)
             {
-                string fileName = Guid.NewGuid().ToString();
-                var uploads = Path.Combine(wwwRootPath, @"images\tshirts");
-                var extension = Path.GetExtension(file.FileName);
-                if (obj.Tshirt.ImageUrl != null)
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                if (item != null)
                 {
-                    var oldImagePath = Path.Combine(wwwRootPath, obj.Tshirt.ImageUrl.TrimStart('\\'));
-                    if (System.IO.File.Exists(oldImagePath))
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"images\tshirts");
+                    var extension = Path.GetExtension(item.FileName);
+                    if (obj.Tshirt.ImageUrl != null)
                     {
-                        System.IO.File.Delete(oldImagePath);
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Tshirt.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
                     }
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                    item.CopyTo(fileStreams);
+                    }
+                    obj.TshirtImages = new TshirtImagesUrl(){};
+                    obj.TshirtImages.ImageURL = @"\images\tshirts\" + fileName + extension;
+                    //obj.TshirtImages.Color = Path.GetFileNameWithoutExtension(item.FileName);
+                    obj.Tshirt.ImageUrl = @"\images\tshirts\" + fileName + extension;
                 }
-                using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                {
-                    file.CopyTo(fileStreams);
-                }
-                obj.Tshirt.ImageUrl = @"\images\tshirts\" + fileName + extension;
-            }
             
             if (obj.Tshirt.Id == 0)
-            {
-                foreach (var item in obj.ColorsIds)
-                {
-                    obj.Tshirt.ColorId = item;
-                    obj.Tshirt.Id = 0;
+            {               
                     _unitOfWork.Tshirt.Add(obj.Tshirt);
                     _unitOfWork.Save();
-                }
+                    obj.TshirtImages.TshirtID = obj.Tshirt.Id;
+                    _unitOfWork.TshirtImageUrl.Add(obj.TshirtImages);
+                    _unitOfWork.Save();
+                        obj.Tshirt.Id = 0;
+                        obj.Tshirt.ImageUrl = null;
+                
                 TempData["success"] = "Tshirt added successfully!";
             }
             else
             {
                     
                 _unitOfWork.Tshirt.Update(obj.Tshirt);
+                _unitOfWork.Save();
                 TempData["success"] = "Tshirt edited successfully!";
-                
             }
-            _unitOfWork.Save();
-
+        }
 
             return RedirectToAction("Index");
-        }
+     }
             
 
     
@@ -107,7 +108,7 @@ namespace eShopWeb.Areas.Admin.Controllers
     [HttpGet]
         public IActionResult GetAll()
         {
-            var tshirtList = _unitOfWork.Tshirt.GetAll(includeProperties: "Color,Size");
+            var tshirtList = _unitOfWork.Tshirt.GetAll(includeProperties: "Size");
             return Json(new { data = tshirtList });
         }
         [HttpDelete]

@@ -28,13 +28,13 @@ namespace eShopWeb.Controllers
                 HomeVM vm = new()
                 {
                     FilterName = FilterName,
-                    Tshirt = _unitOfWork.Tshirt.GetAll(includeProperties: "Color,Size"),
+                    Tshirt = _unitOfWork.Tshirt.GetAll(includeProperties: "Size"),
                  };
                 
                 vm.Tshirt = vm.Tshirt.GroupBy(x => x.ProductCode).First();
                 if (FilterName != null)
                 {
-                    vm.Tshirt = _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Color,Size").GroupBy(x => x.ProductCode).Select(g => g.OrderBy(x => x.ProductCode).FirstOrDefault());
+                    vm.Tshirt = _unitOfWork.Tshirt.GetAll(x => x.Name.Contains(FilterName), includeProperties: "Size").GroupBy(x => x.ProductCode).Select(g => g.OrderBy(x => x.ProductCode).FirstOrDefault());
                 }
                 if (vm.Tshirt.Count()==0)
                 {
@@ -44,14 +44,13 @@ namespace eShopWeb.Controllers
             }
             public IActionResult Details(int tshirtId)
             {
-                var prodCode = _unitOfWork.Tshirt.GetFirstOrDefault(x => x.Id == tshirtId, includeProperties: "Color,Size").ProductCode;
-                var prodSize = _unitOfWork.Tshirt.GetFirstOrDefault(x => x.Id == tshirtId, includeProperties: "Color,Size").Size.Type;
+                var prodCode = _unitOfWork.Tshirt.GetFirstOrDefault(x => x.Id == tshirtId, includeProperties: "Size").ProductCode;
+                var prodSize = _unitOfWork.Tshirt.GetFirstOrDefault(x => x.Id == tshirtId, includeProperties: "Size").Size.Type;
                 ShoppingCart cartObj = new()
                 {
-                    Tshirt = _unitOfWork.Tshirt.GetFirstOrDefault(x => x.Id == tshirtId, includeProperties: "Color,Size"),
+                    Tshirt = _unitOfWork.Tshirt.GetFirstOrDefault(x => x.Id == tshirtId, includeProperties: "Size"),
                     Count = 1,
-                    TshirtId = tshirtId,
-                    ColorList = _unitOfWork.Tshirt.GetAll(x => x.ProductCode == prodCode && x.Size.Type == prodSize, includeProperties: "Color").ToList()
+                    TshirtId = tshirtId                    
                 };
                 return View(cartObj);
             }

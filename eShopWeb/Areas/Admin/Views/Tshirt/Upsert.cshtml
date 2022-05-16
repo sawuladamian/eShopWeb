@@ -42,34 +42,34 @@
   <input asp-for="Tshirt.ProductCode" class="form-control">
   <span asp-validation-for="Tshirt.ProductCode" class="text-danger"></span>
 </div>
-<div class="mb-3 col-6">    
-  <label asp-for="ColorList" ></label>
- @if(Model.Tshirt.Id==0){
-  <select asp-for="ColorsIds" asp-items="@Model.ColorList" class="form-select" multiple></select>
-      }else{
-          <select asp-for="Tshirt.ColorId" asp-items="@Model.ColorList" class="form-select"></select>
-      }      
-  
-  </div>
-  <div class="mb-3 col-6">    
+  <div class="mb-3">    
   <label asp-for="Tshirt.SizeId" ></label>
   <select asp-for="Tshirt.SizeId" asp-items="@Model.SizeList" class="form-select">
       <option disabled selected>--Select Size--</option>
   </select>
+  
   </div>
- 
-<div class="mb-3">    
+  
+<div id="urlinputs" class="mb-3 col-6">
   <label asp-for="Tshirt.ImageUrl" ></label>
-  <input type="file" name="file" asp-for="Tshirt.ImageUrl" id="uploadBox" class="form-control">
+  <input type="file"  name="file" asp-for="Tshirt.ImageUrl" id="uploadBox" class="mb-2 form-control">
 </div>
 
+<div id="colorinputs" class="mb-3 col-6">
+    <label asp-for="TshirtImages.Color" ></label>
+    <input asp-for="TshirtImages.Color" class="mb-2 form-control"></input>
+    <span asp-validation-for="TshirtImages.Color" class="text-danger"></span>
+</div>
+
+
     @if(Model.Tshirt.Id!=0){
-                <button type="submit" class="mt-5 btn btn-primary" style="width:150px;">Update</button>
+                <button type="submit" class="mt-5 mr-2 btn btn-primary" style="width:150px;">Update</button>
             }else
             {
-                <button type="submit" class="mt-5 btn btn-primary" style="width:150px;">Create</button>
+                <input type="button" class="mt-5 btn btn-primary" style="margin-right:5px; width:250px;" onclick="AddNewImageUrlInput()" value="Add more T-shirt Images" id="add" />
+                <button type="submit" onclick="return ValidateInput()" class="mt-5 btn btn-primary" style="margin-right:5px; width:150px;">Create</button>
             }
-            <a asp-controller="Cover" asp-action="Index" class="mt-5 btn btn-dark btn-primary " style="width:150px;">Back to list</a>
+            <a asp-controller="Tshirt" asp-action="Index" class="mt-5 btn btn-dark btn-primary " style="width:150px;">Back to list</a>
         </div>
         
         <img src="" />
@@ -85,6 +85,7 @@
     <partial name="_ValidationScriptsPartial" />
     }
     <script>
+    
        function ValidateInput(){
         if(document.getElementById("uploadBox").value==""){
             Swal.fire({
@@ -96,5 +97,21 @@
         }
          return true;
     }</script>
+    <script>
+        function AddNewImageUrlInput()
+        {           
+              let div = document.createElement('input');
+              let color = document.createElement('input');
+              let firstUpload = document.getElementById("urlinputs");
+              let firstColor = document.getElementById("colorinputs")
+              div.setAttribute("type","file");
+              div.setAttribute("name","file");
+              div.setAttribute("asp-for","Tshirt.ImageUrl");
+              div.setAttribute("class","mb-2 form-control");
+              color.setAttribute("class","mb-2 form-control")
+              firstUpload.appendChild(div);
+              firstColor.appendChild(color);
+        }    
+    </script>
    
     }

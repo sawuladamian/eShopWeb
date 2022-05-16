@@ -11,11 +11,12 @@ namespace eShop.Models.ViewModels
     public class TshirtVM
     {
         public Tshirt Tshirt { get; set; }
-        [ValidateNever]
-        public IEnumerable<SelectListItem> ColorList { get; set; }
+        
         [ValidateNever]
         public IEnumerable<SelectListItem> SizeList { get; set; }
         [ValidateNever]
         public List<int> ColorsIds { get; set; }
+        [ValidateNever]
+        public TshirtImagesUrl TshirtImages { get; set; }
     }
 }

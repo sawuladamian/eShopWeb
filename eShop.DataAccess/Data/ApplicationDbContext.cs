@@ -15,7 +15,6 @@ namespace eShop.DataAccess.Data
         {
         }
         public DbSet<Size> Sizes { get; set; }
-        public DbSet<Color> Colors { get; set; }
         public DbSet<Tshirt> Tshirts { get; set; }
         
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
@@ -23,6 +22,7 @@ namespace eShop.DataAccess.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<TshirtImagesUrl> TshirtImagesUrls { get; set; }
 
     }
 }

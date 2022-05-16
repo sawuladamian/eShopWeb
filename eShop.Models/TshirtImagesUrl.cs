@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace eShop.Models
 {
-    public class Color
+    public class TshirtImagesUrl
     {
         [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Type { get; set; }
-        [Required]
-        public string ColorInRGB { get; set; }
-              
+        public int UrlID { get; set; }
+        [ForeignKey("TshirtID")]
+        public int TshirtID { get; set; }
+        [ValidateNever]
+        public string ImageURL { get; set; }
+        [ValidateNever]
+        public string Color { get; set; }
     }
 }
